@@ -42,7 +42,8 @@ class Pedido:
     def sugerir_frete_gratis(self, sms_service) -> None:
         if self.tem_frete_gratis():
             return
-        sms_service.enviar(self.cliente, VALOR_FRETE_GRATIS - self.subtotal())
+        valor_faltante = round(VALOR_FRETE_GRATIS - self.subtotal(), 2)
+        sms_service.enviar(self.cliente, valor_faltante)
 
 
 def contar_frete_gratis(pedidos: list) -> int:
