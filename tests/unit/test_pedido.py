@@ -75,6 +75,11 @@ def test_contar_frete_gratis_lista_vazia():
 # Requisito 2 — situacao(unidades_indisponiveis) -> str
 # Escreva os testes ANTES de implementar o método
 
+def test_situacao_cancelado_quando_mais_de_25_por_cento_indisponivel():
+    # 4 unidades x 25,00 = 100,00 (frete grátis), mas 2 de 4 (50%) sem estoque
+    pedido = Pedido("Carla", [Item("Combo", 25.0, 4)])
+    assert pedido.situacao(2) == "Cancelado por falta de estoque"
+
 
 
 # Requisito 3 — sugerir_frete_gratis(sms_service) -> None
