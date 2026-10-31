@@ -29,6 +29,11 @@ def test_bug2_frete_gratis_com_subtotal_exatamente_50():
     assert pedido.tem_frete_gratis() is True
 
 
+def test_bug3_item_mais_barato_retorna_o_menor_preco(pedido_pequeno):
+    # Pão de queijo (4,50) é mais barato que o Café (6,00)
+    assert pedido_pequeno.item_mais_barato().nome == "Pão de queijo"
+
+
 
 # =============================================================
 # PARTE 2 — Implemente com TDD
