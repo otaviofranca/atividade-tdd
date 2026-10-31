@@ -129,3 +129,11 @@ def test_sugerir_frete_gratis_exatamente_50_nao_aciona_o_servico():
     pedido = Pedido("Carla", [Item("Combo", 25.0, 2)])  # 50,00
     pedido.sugerir_frete_gratis(sms_service)
     sms_service.enviar.assert_not_called()
+
+
+def test_sugerir_frete_gratis_valor_faltante_em_centavos():
+    # 50,00 - 49,90 em float dá 0.10000000000000142; deve ser 0.1
+    sms_service = MagicMock()
+    pedido = Pedido("Ana", [Item("Lanche", 49.9, 1)])
+    pedido.sugerir_frete_gratis(sms_service)
+    sms_service.enviar.assert_called_once_with("Ana", 0.1)
