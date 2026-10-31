@@ -34,7 +34,9 @@ class Pedido:
     def situacao(self, unidades_indisponiveis: int) -> str:
         if unidades_indisponiveis / self.quantidade_total() > 0.25:
             return "Cancelado por falta de estoque"
-        return "Confirmado com frete grátis"
+        if self.tem_frete_gratis():
+            return "Confirmado com frete grátis"
+        return "Confirmado"
 
 
 def contar_frete_gratis(pedidos: list) -> int:
